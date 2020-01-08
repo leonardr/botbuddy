@@ -23,6 +23,7 @@ class MastodonPublisher(Publisher):
             access_token = instance['access_token'],
             api_base_url = url
         )
+        self.max_chars = instance.get('max_chars', 500)
 
     def self_test(self):
         # Do something that will raise an exception if the credentials are invalid.
@@ -68,7 +69,7 @@ class MastodonPublisher(Publisher):
         # some cases the maximum length might be different.
         if isinstance(content, str):
             content = content.encode("utf8")
-        return content[:500]
+        return content[:int(self.max_chars)]
 
 
 Publisher = MastodonPublisher

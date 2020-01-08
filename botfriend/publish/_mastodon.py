@@ -31,7 +31,7 @@ class MastodonPublisher(Publisher):
         # credentials to the wrong account.
         verification = self.api.account_verify_credentials()
         if 'username' in verification:
-            return ['username']
+            return verification['username']
         else:
             # error
             raise Exception(repr(verification))
